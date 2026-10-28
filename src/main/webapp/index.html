@@ -1,0 +1,270 @@
+<!DOCTYPE html> <!--문서 선언 -->
+
+<html> <!-- 문서 전체 -->
+<head> <!-- 문서 설정 -->
+<meta charset="UTF-8"> <!-- 문서 정보 -->
+
+<!-- 모바일 브라우저에서 페이지 너비를 기기의 화면에 맞춰 표시하도록 설정 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MyOrbit</title> <!-- 문서 제목 -->
+<style>
+ #myorbit {
+ 	display:flex;
+ 	justify-content:space-between; 
+ 	align-items:center;
+ 	padding : 15px;
+ 	grid-template-columns: 1fr auto 1fr;
+ 	
+ }
+ #logo{
+ 	font-size:22px;
+ 	font-weight: 300;
+ 	text-decoration:none;
+ }
+ #message {
+ 		color: #b9a0fe;
+ 		font-size:15px;
+ 		margin:20px;
+ 		text-align:center;
+ 		letter-spacing:1px;
+ }
+ #start{
+ 	padding:14px 28px; /*위아래 14, 좌우 28*/
+ 	margin-top:40px; /*위아래와 좌우 모두 20*/
+ 	background-color: var(--point-color);
+ 	border-radius:20px;
+ 	border: none;
+ 	box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+ 	font-size:15px;
+ 	font-weight:normal;
+ 	transition:transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+ }
+ #start:hover{
+ 	background-color: var(--main-color);
+ 	transition: background-color 0.3s ease;
+ 	transform:translateY(-2px);
+ 	cursor:pointer;
+ 	color:white;
+ 	font-weight:350;
+ 	box-shadow : 0 6px 16px rgba(0,0,0,0.12);
+ }
+#start:active{
+	transform : scale(0.98);
+}
+
+ #top-start{
+ 	padding:10px;
+ 	background-color: var(--point-color);
+ 	border-radius:10px;
+ 	text-decoration:none;
+ 	justify-self:end;
+ }
+ 
+ #top-start:hover{
+ background-color:#F6DCE8;
+ color:white;
+ font-weight:350;
+ }
+ 
+ #title{
+ font-size:50px;
+ color: black;
+ margin-bottom:40px;
+ line-height:1.4;
+ }
+
+
+#myorbit img {
+    width: 120px;
+    height: auto;
+}
+#description{
+	max-width:500px;
+	margin: 0 auto;
+}
+
+.pink-button{
+	font-weight:bold;
+}
+
+/*기능 소개 영역 전체*/
+#features{
+ max-width:1100px;
+}
+/*각각의 기능 카드*/
+.features-card{
+	text-align:center;
+	transition: transform 0.2s ease;
+}
+
+.features-card:hover {
+    transform: translateY(-5px);
+}
+
+.features-grid{
+	display : grid;
+	grid-template-columns:repeat(4,1fr);
+	gap:40px;
+	margin-top:40px;
+}
+
+.features-card img{
+	width:100px;
+	height:100px;
+	object-fit:contain;
+}
+
+.features-card h3{
+font-size:16px;
+font-weight:600;
+margin-top:16px;
+margin-bottom:8px;
+}
+
+.features-card p{
+font-size:13px;
+line-height:1.6;
+color:#999999;
+}
+
+main{
+	display: flex;
+	flex-direction:column; 
+    justify-content: center; 
+    align-items: center;
+    /*min-height:70vh; 70vh는 화면 높이의 70% 의미. 따라서 main은 최소한 화면 높이의 70%만큼 공간을 차지한다.*/
+	flex:1; /*메인이 남는 공간 차지하도록 설정*/
+}
+
+body{
+	display:flex;/*flex 배치 활성화*/
+	flex-direction:column; /*헤더, 메인, 푸터를 세로로 배치*/
+	min-height:100vh; /*화면 높이만큼 최소 공간 확보*/
+	margin:0;
+}
+
+footer{
+	text-align:center;
+}
+
+nav{
+ display:flex;
+ gap:45px;
+ justify-content: center;
+ transform: translateX(-18px);
+}
+nav a{
+ width:100px;
+ text-align:center;
+ white-space: nowrap;
+}
+
+a{
+text-decoration:none;
+color:#777777;
+}
+a:hover{
+text-decoration:none;
+color:var(--main-color);
+}
+
+ p{
+ color: var(--text-color);
+ }
+ 
+ section{
+ text-align:center;
+ margin-top:70px;
+ margin-bottom:20px;
+ margin-left:auto;
+ margin-right:auto;
+ max-width:700px; 
+ width:100%;
+ padding-left:20px;
+ padding-right:20px;
+ box-sizing: border-box; 
+ }
+ 
+ @media(max-width:600px){
+ 	#title{
+ 	font-size:32px
+ 	}
+ 	
+ 	.features-grid{
+ 	grid-template-columns:repeat(2,1fr);
+ 	gap:20px;
+ 	}
+ }
+ 
+ :root{
+ --main-color:#B9A0FE;
+ --point-color:#FFD8D8;
+ --text-color: #777777;
+ }
+</style>
+</head> 
+
+
+<body> <!-- 본문 -->
+	
+	<!-- header에서 로고와 메뉴 -->
+	<header id="myorbit"><img src="images/myorbit-logo.png" alt="MyOrbit 로고">
+		<nav>
+			<a href="#features">서비스소개</a>
+			<a href="#">마음기록</a>
+			<a href="#">성장리포트</a>
+		</nav>
+			<a id="top-start" href="#">시작하기</a>
+	</header>
+	
+	<!-- main에서 메인 문구와 시작 버튼 -->
+	<main> <!-- 핵심 콘텐츠 감싸는 태크 -->
+		<section>
+			<p id="message">MY OWN RHYTHM</p>
+			<h1 id="title">나만의 속도로, <br>나만의 궤도를.</h1>
+			<p id="description">해야 할 일에 쫓기기보다, 나에게 맞는 리듬으로 하루를 계획해보세요.</p>
+			<button id="start" class="pink-button">나의 궤도 시작하기 →</button>
+		</section>
+		
+		<section id="features">
+			<h2>마이오빗과 함께하는 하루</h2>
+			<p>나만의 리듬으로 목표를 이루어 보세요.</p>
+			
+			<div class="features-grid">
+			
+			<div class="features-card">
+				<img src="images/mandalart.png" alt="만다라트 목표 관리">
+				<h3>만다라트 목표 관리</h3>
+				<p>큰 목표를 작은 실천으로<br> 나누어 보세요.</p>
+			</div>
+			
+			<div class="features-card">
+				<img src="images/weekly.png" alt="주간계획 세우기">
+				<h3>주간계획 세우기</h3>
+				<p>한 주의 목표를 정하고<br>우선순위를 설정해보세요.</p>
+			</div>
+			
+			<div class="features-card">
+				<img src="images/todo.png" alt="오늘의 할 일">
+				<h3>오늘의 할 일</h3>
+				<p>오늘 해야 할 일을<br> 하나씩 실천해 보세요.</p>
+			</div>
+			
+			<div class="features-card">
+				<img src="images/report.png" alt="성장 리포트">
+				<h3>성장 리포트</h3>
+				<p>나의 기록을 돌아보며<br> 작은 성장을 발견해 보세요.</p>
+			</div>
+			
+			</div>
+		</section>
+	</main>
+	
+	<!-- 페이지 하단 정보 -->
+	<footer>
+		<p>© 2026 MyOrbit</p>
+		<p>나만의 리듬으로, 나만의 궤도를.</p>
+	</footer>
+</body>
+</html>
