@@ -13,13 +13,6 @@
     padding-bottom:30px;
 }
 
-#top-bar2{
-display:flex;
-flex-direction:row;
-gap:20px;
-}
-
-
 #todo-input{
 background-color: #FFF0F5;
 border:none;
@@ -163,14 +156,28 @@ box-sizing:border-box;
 
 
 
-.top-bar{
-display:flex;
-align-items:center;
-justify-content:flex-end;
-gap:30px;
-height:60px;
-padding: 0 30px;
-border-bottom:1px solid #ddd;
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    height: 50px;
+    padding: 0 20px;
+    margin-bottom:20px;
+    box-sizing: border-box;
+}
+
+.top-bar p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.top-bar img {
+    width: 22px;
+    height: 22px;
+    display: block;
+    transform: translate(10px, 15px);
 }
 
 .card{
@@ -192,8 +199,9 @@ gap:30px;
 .right-panel{
 display:flex;
 flex-direction: column;
-gap:20px;
+gap:12px;
 padding:0 20px 30px 20px;
+background-color: #FFF6F9;
 }
 
 .calendar-header{
@@ -246,8 +254,8 @@ display: flex;
 flex-direction:column;
 gap:20px;
 border-top:1.5px solid #EEEEF0;
-padding-top:25px;
-margin-top:30px;
+padding-top:20px;
+margin-top:10px;
 }
 
 .menu-title {
@@ -315,17 +323,21 @@ display:inline;
 }
 
 .daily-message{
-padding:10px;
-margin-top:10px;
-margin-bottom:10px;
+width: 100%;
+margin: 0;
+padding: 0;
+background: transparent;
+box-shadow: none;
+border: none;
 }
 
-.daily-message h2{
-margin:10px;
-}
 
-.daily-message p{
-margin:10px;
+.daily-message img{
+display:block;
+width:100%;
+height:90px;
+object-fit:cover;
+border-radius: 15px;
 }
 
 :root {
@@ -532,15 +544,12 @@ margin:10px;
 		
 		<!-- 알림, 프로필 -->
 				<header class="top-bar">
-					<div id="top-bar2">
 						<p><img src="images/bell.svg" alt=""></p>
 						<p><img src="images/user.svg" alt=""></p>
-					</div>
 				</header>
 				
-				<section class="daily-message card">
-					<h2>오늘의 한마디</h2>
-					<p>작은 걸음도 나만의 궤도를 만들어 가는 과정이에요</p>
+				<section class="daily-message">
+					<img src="images/daily-message.png" alt="작은 걸음도 나만의 궤도를 만들어 가는 과정이에요">
 				</section>
 				
 				<section class="calendar card">
