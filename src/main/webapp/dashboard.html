@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyOrbit - Dashboard</title>
+<style type="text/css">
+
+#myorbit {
+	display:block;
+    width: 140px;
+    height: auto;
+    margin:0 auto;
+    padding-bottom:30px;
+}
+
+#top-bar2{
+display:flex;
+flex-direction:row;
+gap:20px;
+}
+
+
+#todo-input{
+background-color: #FFF0F5;
+border:none;
+border-radius: 12px;
+padding:14px;
+width:100%;
+box-sizing:border-box;
+
+}
+
+#todo-input::placeholder{
+ color: #FF9ABC;
+}
+
+#todo-input:focus{
+outline:1px solid #FF9ABC;
+}
+
+#hi{
+margin:0 30px;
+}
+
+nav{
+display:flex;
+flex-direction:column;
+gap:20px;
+padding: 0 15px;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #92929E;
+    text-decoration: none;
+    font-size: 14px;
+    min-height:22px;
+}
+
+/* 선택된 메뉴 */
+nav a.active {
+    color: var(--point-color);
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--point-color);
+}
+
+nav a img {
+    width: 18px;
+    height: 18px;
+}
+
+ul{
+list-style:none;
+padding-left:0px;
+display:flex;
+flex-direction:column; 
+}
+
+li{
+margin-bottom:15px;
+}
+
+#todo li:has(input:checked){
+order:1;
+}
+
+input[type="checkbox"]{
+ appearance: none;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #AAAAAA;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #FF9ABC;
+    border:none;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✔";
+    display: block;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 18px;
+}
+
+input:checked + span{
+text-decoration:line-through;
+color:#AAAAAA;
+}
+
+
+main{
+background-color: #FAF9FC;
+padding:20px;
+padding-bottom:100px;
+min-height:500px;
+}
+
+body{
+margin:0;
+}
+
+.active {
+    background-color: #FCE0EF;
+    color: #FF4FA3;
+    border-radius: 12px;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+
+.dashboard-layout{
+display : grid;
+grid-template-columns: 200px minmax(0,1fr) 360px;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns: repeat(2,minmax(0, 1fr));
+gap : 30px;
+}
+
+.dashboard-main{
+min-width:0;
+}
+
+.sidebar{
+padding-top:30px;
+box-sizing:border-box;
+}
+
+
+
+.top-bar{
+display:flex;
+align-items:center;
+justify-content:flex-end;
+gap:30px;
+height:60px;
+padding: 0 30px;
+border-bottom:1px solid #ddd;
+}
+
+.card{
+background-color : #FFFFFF;
+padding:30px;
+border-radius:15px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+min-width:0;
+box-sizing:border-box;
+}
+
+
+.daily-records{
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+.right-panel{
+display:flex;
+flex-direction: column;
+gap:20px;
+padding:0 20px 30px 20px;
+}
+
+.calendar-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.calendar-weekdays{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+text-align:center;
+gap:5px;
+}
+
+.calendar-weekdays span:nth-child(6){
+color:blue;
+}
+
+.calendar-weekdays span:nth-child(7) {
+    color: #FF6B6B;
+}
+
+.calendar-days{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px;
+text-align:center;
+}
+
+.calendar-days button{
+border:none;
+background-color: transparent; /*버튼 배경 투명하게*/
+cursor:pointer; /*마우스를 올리면 손가락 모양 표시*/
+}
+
+.calendar-days button.today{
+background-color: #FF9ABC;
+color: white;
+border-radius: 50%;
+width:26px;
+height:26px;
+padding:0;
+justify-self:center;
+font-weight:500;
+}
+
+.menu-bottom{
+display: flex;
+flex-direction:column;
+gap:20px;
+border-top:1.5px solid #EEEEF0;
+padding-top:25px;
+margin-top:30px;
+}
+
+.menu-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-title img{
+width:18px;
+height:18px;
+}
+
+.submenu {
+    padding-left: 25px;
+    margin-top: 15px;
+}
+
+.submenu li {
+    margin-bottom: 15px;
+}
+
+.submenu a {
+    color: #667399;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.submenu-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submenu-arrow img{
+width:14px;
+height:14px;
+}
+
+.arrow-open{
+display:none;
+}
+
+.menu-group[open] .arrow-closed{
+display:none;
+}
+
+.menu-group[open] .arrow-open{
+display:inline;
+}
+
+.menu-group summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    color: #92929E;
+    font-size: 14px;
+    min-height:22px;
+}
+
+.menu-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.daily-message{
+padding:10px;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+.daily-message h2{
+margin:10px;
+}
+
+.daily-message p{
+margin:10px;
+}
+
+:root {
+    --point-color: #F46BA4;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="dashboard-layout">
+	<!-- 왼쪽 사이드바 -->
+	<aside class="sidebar">
+		<img id="myorbit" src="images/myorbit-logo.png" alt="MyOrbit 로고">
+		
+		<!-- 메뉴 -->
+		<nav>
+			<a href="dashboard.html"><img src="images/home.svg" alt="">홈</a>
+			<a href="#"><img src="images/calendar.svg" alt="">달력</a>
+			
+			<details class="menu-group">
+				<summary>
+					<span class="menu-title">
+						<img src="images/circle.svg" alt="">
+					목표 관리
+					</span>
+					
+					<span class="submenu-arrow">
+						<img class="arrow-closed" src="images/chevron-right.svg" alt="">
+						<img class="arrow-open" src="images/chevron-down.svg" alt="">
+					</span>
+				</summary>
+				
+				<ul class="submenu">
+					<li><a href="#">만다라트(연간/월간)</a></li>
+					<li><a href="#">주간 목표</a></li>
+					<li><a href="#">오늘의 할 일</a></li>
+					<li><a href="#">습관 관리</a></li>
+				</ul>
+			</details>
+			
+			
+			<details class="menu-group">
+				<summary>
+					<span class="menu-title">
+						<img src="images/heart.svg" alt="">
+						마음과 몸
+					</span>
+						
+					<span class="submenu-arrow">
+						<img class="arrow-closed" src="images/chevron-right.svg" alt="">
+						<img class="arrow-open" src="images/chevron-down.svg" alt="">
+					</span>
+				</summary>
+				<ul class="submenu">
+					<li><a href="#">컨디션 &amp; 무드트래커</a></li>
+					<li><a href="#">수면 기록</a></li>
+					<li><a href="#">생리주기 / PMS</a></li>
+					<li><a href="#">약 복용 기록</a></li>
+					<li><a href="#">진료 준비 리포트</a></li>
+				</ul>
+			</details>
+		
+			
+			<details class="menu-group">
+				<summary>
+					<span class="menu-title">
+						<img src="images/chart.svg" alt="">
+						나의 성장
+					</span>
+						
+					<span class="submenu-arrow">
+						<img class="arrow-closed" src="images/chevron-right.svg" alt="">
+						<img class="arrow-open" src="images/chevron-down.svg" alt="">
+					</span>
+				</summary>
+				<ul class="submenu">
+					<li><a href="#">성장 리포트</a></li>
+					<li><a href="#">월간 회고</a></li>
+				</ul>
+			</details>
+			
+			<div class="menu-bottom">
+				<a href="#"><img src="images/settings.svg" alt="">설정</a>
+				<a href="#"><img src="images/headset.svg" alt="">고객센터</a>
+			</div>
+		</nav>
+			
+		
+	</aside>
+		
+		<!-- 대시보드 콘텐츠 -->
+		<main class="dashboard-main">
+			<div id = "hi">
+				<h1>안녕하세요, @@님!</h1>
+				<p>오늘도 나만의 속도로, 좋은 방향으로 나아가고 있어요</p>
+			</div>
+			<section class="dashboard-grid">
+				
+				<article class="card">
+					<h2>이번주 핵심 목표 3가지</h2>
+					<ul>
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>SQLD 기출문제 3회 풀기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>자바스크립트 복습하기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>MyOrbit 메인 화면 완성하기</span>
+							</label>
+						</li>
+					</ul>
+				</article>
+			
+			
+				<article class="card">
+					<h2>오늘의 할 일</h2>
+					<progress value="1" max="3"></progress>
+					
+				
+					
+					<ul id="todo">
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>SQLD 공부하기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>java 반복문 공부하기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>아침 러닝하기</span>
+							</label>
+						</li>
+					</ul>
+					
+						<input id="todo-input" type="text" placeholder="+ 할 일을 입력하세요">
+					
+				</article>
+				
+				<article class="card">
+					<h2>습관 체크</h2>
+			
+					<ul id="habits">
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>물 2L 마시기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>주2회 운동하기</span>
+							</label>
+						</li>
+						
+						<li>
+							<label>
+								<input type="checkbox">
+								<span>일기 쓰기</span>
+							</label>
+						</li>
+					</ul>
+					</article >
+					
+					<div class="daily-records">
+						<article class="card">
+							<h2>약 복용 기록</h2>
+						</article>
+						
+						
+						<article class="card">
+							<h2>오늘의 컨디션</h2>
+						</article>
+					</div>
+			</section>
+		</main>
+		
+		<!-- 오른쪽 전체 영역 -->
+		<aside class="right-panel">
+		
+		
+		<!-- 알림, 프로필 -->
+				<header class="top-bar">
+					<div id="top-bar2">
+						<p><img src="images/bell.svg" alt=""></p>
+						<p><img src="images/user.svg" alt=""></p>
+					</div>
+				</header>
+				
+				<section class="daily-message card">
+					<h2>오늘의 한마디</h2>
+					<p>작은 걸음도 나만의 궤도를 만들어 가는 과정이에요</p>
+				</section>
+				
+				<section class="calendar card">
+					
+					<div class="calendar-header">
+						<button type="button" id="prev-month">&lt;</button>
+						<h3 id="calendar-title">2026년 10월</h3>
+						<button type="button" id="next-month">&gt;</button>
+					</div>
+					<div class="calendar-weekdays">
+						<span>월</span>
+						<span>화</span>
+						<span>수</span>
+						<span>목</span>
+						<span>금</span>
+						<span>토</span>
+						<span>일</span>
+					</div>
+					
+					<div class="calendar-days" id="calendar-days"></div>
+				</section>
+				
+				<section class="today-schedule card">
+					<h2>오늘의 일정</h2>
+				</section>
+				
+				<section class="health-widget card">
+					<h2>생리주기 / 수면기록</h2>
+				</section>
+		
+	</aside>
+</div>
+
+
+
+<script type="text/javascript">
+
+/*todo 입력창 가져오기*/
+const todoInput = document.getElementById("todo-input");
+const todoList = document.getElementById("todo");
+
+todoInput.addEventListener("keydown", function(event){
+	if(event.key==="Enter"){
+	
+		const newLi = document.createElement("li");
+		newLi.textContent = todoInput.value;
+		
+		const newCheckbox = document.createElement("input");
+		newCheckbox.type = "checkbox";
+		
+		newLi.appendChild(newCheckbox);
+		todoList.appendChild(newLi);
+		
+	}
+});
+
+/*자동으로 날짜 설정*/
+const today = new Date();
+let year = today.getFullYear(); /*현재 연도 가져오는 메서드*/
+let month = today.getMonth() + 1; /*getMonth()는 1월을 0으로 계산하기 때문에 +1 해주기*/
+
+/*달력의 연도와 월 자동으로 표시하기*/
+const calendarTitle = document.getElementById("calendar-title");
+calendarTitle.textContent = year + "년 " + month + "월";
+
+/* 달력 날짜 자동 생성하기 */
+const lastDate = new Date(year, month, 0).getDate();
+const calendarDays = document.getElementById("calendar-days");
+
+const firstDay = new Date(year, month - 1, 1).getDay();
+const startDay = (firstDay + 6) % 7;
+for (let i = 0; i < startDay; i++) {
+    const emptyDay = document.createElement("span");
+    calendarDays.appendChild(emptyDay);
+
+}
+
+/* 날짜 만들기 */
+for (let i = 1; i <= lastDate; i++) {
+    const dayButton = document.createElement("button");
+    dayButton.type = "button";
+    dayButton.textContent = i;
+    // 오늘 날짜인지 확인하기
+    if (i === today.getDate()) {
+        dayButton.classList.add("today");
+    }
+    calendarDays.appendChild(dayButton);
+}
+
+
+
+</script>
+</body>
+</html>

@@ -10,11 +10,10 @@
 <title>MyOrbit</title> <!-- 문서 제목 -->
 <style>
  #myorbit {
- 	display:flex;
- 	justify-content:space-between; 
- 	align-items:center;
- 	padding : 15px;
- 	grid-template-columns: 1fr auto 1fr;
+ 	display: flex;
+    align-items: center;
+    padding: 15px;
+    position: relative;
  	
  }
  #logo{
@@ -30,6 +29,7 @@
  		letter-spacing:1px;
  }
  #start{
+ 	display:inline-block;
  	padding:14px 28px; /*위아래 14, 좌우 28*/
  	margin-top:40px; /*위아래와 좌우 모두 20*/
  	background-color: var(--point-color);
@@ -53,19 +53,6 @@
 	transform : scale(0.98);
 }
 
- #top-start{
- 	padding:10px;
- 	background-color: var(--point-color);
- 	border-radius:10px;
- 	text-decoration:none;
- 	justify-self:end;
- }
- 
- #top-start:hover{
- background-color:#F6DCE8;
- color:white;
- font-weight:350;
- }
  
  #title{
  font-size:50px;
@@ -141,7 +128,6 @@ body{
 	display:flex;/*flex 배치 활성화*/
 	flex-direction:column; /*헤더, 메인, 푸터를 세로로 배치*/
 	min-height:100vh; /*화면 높이만큼 최소 공간 확보*/
-	margin:0;
 }
 
 footer{
@@ -149,10 +135,13 @@ footer{
 }
 
 nav{
- display:flex;
- gap:45px;
- justify-content: center;
- transform: translateX(-18px);
+  display: flex;
+    gap: 45px;
+    justify-content: center;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 nav a{
  width:100px;
@@ -208,6 +197,7 @@ color:var(--main-color);
 
 <body> <!-- 본문 -->
 	
+	
 	<!-- header에서 로고와 메뉴 -->
 	<header id="myorbit"><img src="images/myorbit-logo.png" alt="MyOrbit 로고">
 		<nav>
@@ -215,7 +205,6 @@ color:var(--main-color);
 			<a href="#">마음기록</a>
 			<a href="#">성장리포트</a>
 		</nav>
-			<a id="top-start" href="#">시작하기</a>
 	</header>
 	
 	<!-- main에서 메인 문구와 시작 버튼 -->
@@ -224,7 +213,7 @@ color:var(--main-color);
 			<p id="message">MY OWN RHYTHM</p>
 			<h1 id="title">나만의 속도로, <br>나만의 궤도를.</h1>
 			<p id="description">해야 할 일에 쫓기기보다, 나에게 맞는 리듬으로 하루를 계획해보세요.</p>
-			<button id="start" class="pink-button">나의 궤도 시작하기 →</button>
+			<a href="dashboard.html" id="start" class="pink-button">나의 궤도 시작하기 →</a>
 		</section>
 		
 		<section id="features">
